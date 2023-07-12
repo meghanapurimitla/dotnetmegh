@@ -16,7 +16,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: megh
-        image: meghanapurimitla/megh:1.0.0
+      - name: aks0712
+        image: aks0712.azurecr.io/image0712:1.0.0
         ports:
         - containerPort: 80
