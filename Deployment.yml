@@ -15,7 +15,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: dockerdep-10-app
-        image: nbyreddy/dockerdep-10-app:1.0.0
+      - name: newfile
+        image: meghanapurimitla/newfile:1.0.0
         ports:
         - containerPort: 80
