@@ -15,7 +15,7 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: newfile
-        image: meghanapurimitla/newfile:1.0.0
+      - name: meghfile
+        image: meghanapurimitla/meghfile:1.0.0
         ports:
         - containerPort: 80
