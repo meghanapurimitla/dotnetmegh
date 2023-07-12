@@ -20,3 +20,5 @@ spec:
         image: aks0712.azurecr.io/image0712:1.0.0
         ports:
         - containerPort: 80
+      imagePullSecrets:
+    - name: aks0712secret
