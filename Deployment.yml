@@ -15,7 +15,9 @@ spec:
         app: seven
     spec:
       containers:
-      - name: july20
+      - name: seven
         image: acr0720.azurecr.io/july20:1.0.0
         ports:
         - containerPort: 80
+      imagePullSecrets:
+        - name:  meghana
