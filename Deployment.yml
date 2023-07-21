@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker
+  name: july
   labels:
-    app: myapp
+    app: july20
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: july20 
   template:
     metadata:
       labels:
-        app: myapp
+        app: july20
     spec:
       containers:
-      - name: newfile
-        image: meghanapurimitla/newfile:1.0.0
+      - name: july20
+        image: meghanapurimitla/july20:1.0.0
         ports:
         - containerPort: 80
