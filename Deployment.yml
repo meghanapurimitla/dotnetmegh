@@ -20,8 +20,9 @@ spec:
         ports:
         - containerPort: 80
       imagePullSecrets:
-        - name:  meghana
-    strategy:
+        - name: meghana
+    # The "strategy" field should be under the "spec" section, not under "template"
+  strategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
