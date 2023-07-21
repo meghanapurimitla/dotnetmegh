@@ -19,6 +19,20 @@ spec:
         image: acr0720.azurecr.io/july20:1.0.0
         ports:
         - containerPort: 80
+        # Adding Liveness Probe
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        # Adding Readiness Probe
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
       imagePullSecrets:
         - name: meghana
     # The "strategy" field should be under the "spec" section, not under "template"
