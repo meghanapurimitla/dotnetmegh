@@ -1,0 +1,31 @@
+# rbac.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: seven-service-account
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: seven-role
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "update"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: seven-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: seven-service-account
+roleRef:
+  kind: Role
+  name: seven-role
+  apiGroup: rbac.authorization.k8s.io
