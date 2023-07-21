@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: july20
-        image: meghanapurimitla/july20:1.0.0
+        image: acr0720.azurecr.io/july20:1.0.0
         ports:
         - containerPort: 80
