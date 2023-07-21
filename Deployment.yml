@@ -21,3 +21,8 @@ spec:
         - containerPort: 80
       imagePullSecrets:
         - name:  meghana
+    strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1

@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: seven-hpa
+  labels:
+    app: seven
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: seven
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
