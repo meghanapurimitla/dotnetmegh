@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: seven
+  namespace: default
   labels:
     app: seven
 spec:
@@ -11,33 +12,33 @@ spec:
       app: seven
   template:
     metadata:
+      annotations:
+        network.kubernetes.io/network-policy: "seven-network-policy"
       labels:
         app: seven
-      annotations:
-        network.kubernetes.io/network-policy: "seven-network-policy"  # Add this line to associate the NetworkPolicy
     spec:
-      serviceAccountName: seven-service-account
       containers:
-      - name: seven
-        image: acr0720.azurecr.io/july20:1.0.0
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        - name: seven
+          image: acr0720.azurecr.io/july20:1.0.0
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
       imagePullSecrets:
         - name: meghana
-    strategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 1
-        maxSurge: 3
+      serviceAccountName: seven-service-account
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+    type: RollingUpdate
