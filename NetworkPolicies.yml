@@ -2,17 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: seven-network-policy
+  namespace: default
 spec:
   podSelector:
     matchLabels:
       app: seven
-  policyTypes:
-  - Ingress
   ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: seven
-    ports:
-    - protocol: TCP
-      port: 80
+    - from:
+        - podSelector:
+            matchLabels:
+              app: allowed-source-app

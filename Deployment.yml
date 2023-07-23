@@ -21,24 +21,39 @@ spec:
         - name: seven
           image: acr0720.azurecr.io/july20:1.0.0
           ports:
-            - containerPort: 5000   # Change this to 5000 to match the application's listening port
+            - containerPort: 5000
           livenessProbe:
             httpGet:
               path: /healthz
-              port: 5000            # Change this to 5000 to match the application's listening port
+              port: 5000
             initialDelaySeconds: 15
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /readyz
-              port: 5000            # Change this to 5000 to match the application's listening port
+              port: 5000
             initialDelaySeconds: 5
             periodSeconds: 10
       imagePullSecrets:
         - name: meghana
       serviceAccountName: seven-service-account
-  strategy:
-    rollingUpdate:
-      maxSurge: 3
-      maxUnavailable: 1
-    type: RollingUpdate
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seven-ingress
+  namespace: default
+spec:
+  rules:
+    - host: myapp.example.com   # Replace this with your actual domain or IP address
+      http:
+        paths:
+          - path: /                # Change this if you want a different base path
+            pathType: Prefix
+            backend:
+              service:
+                name: seven
+                port:
+                  number: 5000        # Change this to match the containerPort above
