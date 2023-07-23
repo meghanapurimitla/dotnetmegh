@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: seven-service
+  name: seven
   namespace: default
+  labels:
+    app: seven
 spec:
   selector:
     app: seven
   ports:
     - protocol: TCP
-      port: 80        # Port on which the service will listen
-      targetPort: 5000   # Port on which your application is running inside the pod
-  type: LoadBalancer   # Change this from ClusterIP to LoadBalancer
+      port: 80
+      targetPort: 5000   # Change this to match the containerPort in the Deployment
+  type: LoadBalancer

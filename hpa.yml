@@ -9,11 +9,11 @@ spec:
     kind: Deployment
     name: seven
   minReplicas: 2
-  maxReplicas: 5
+  maxReplicas: 10    # Set the maximum number of replicas you want for autoscaling
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 50  # Set the desired CPU utilization percentage
+          averageUtilization: 50   # Adjust this as needed for your application's CPU utilization target

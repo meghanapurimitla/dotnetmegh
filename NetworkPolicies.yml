@@ -7,8 +7,10 @@ spec:
   podSelector:
     matchLabels:
       app: seven
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              app: allowed-source-app
+              app: frontend    # Add labels here for pods allowed to access the 'seven' pods

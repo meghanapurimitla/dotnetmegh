@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seven-ingress
+  namespace: default
+spec:
+  rules:
+    - host: myapp.example.com   # Replace this with your actual domain or IP address
+      http:
+        paths:
+          - path: /                # Change this if you want a different base path
+            pathType: Prefix
+            backend:
+              service:
+                name: seven
+                port:
+                  number: 5000        # Change this to match the containerPort in the Deployment
