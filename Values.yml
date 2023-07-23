@@ -1,0 +1,14 @@
+# values.yaml
+replicas: 2
+image:
+  repository: acr0720.azurecr.io/july20
+  tag: 1.0.0
+containerPort: 5000
+livenessProbePath: /healthz
+readinessProbePath: /readyz
+initialDelaySeconds: 15
+periodSeconds: 10
+nodeSelectorKey: Company
+nodeSelectorValue: Project
+imagePullSecretName: meghana
+serviceAccountName: seven-service-account

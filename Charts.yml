@@ -1,0 +1,4 @@
+apiVersion: v2
+name: my-flask-app  # Replace with the name of your Helm chart
+version: 0.1.0  # Set the initial version of your Helm chart
+description: A Helm chart for deploying a Flask application on Kubernetes
