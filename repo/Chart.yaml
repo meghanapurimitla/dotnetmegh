@@ -1,24 +1,66 @@
 apiVersion: v2
-name: repo
-description: A Helm chart for Kubernetes
-
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
+name: my-dotnet-chart
 version: 0.1.0
+description: A Helm chart for deploying the 'seven' application
 
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
-# It is recommended to use it with quotes.
-appVersion: "1.16.0"
+# This section defines the structure of the Kubernetes resources that will be deployed.
+# In this case, it specifies a Deployment resource for your 'seven' application.
+# Make sure to indent it properly.
+type: app
+appVersion: 1.0
+
+# Metadata for the Deployment resource
+metadata:
+  name: seven
+  namespace: default
+  labels:
+    app: seven
+
+# Specify the resources and configuration for your Deployment
+# The 'spec' section corresponds to the 'spec' section in your deployment.yml
+# Make sure to indent it properly.
+values:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: seven
+  template:
+    metadata:
+      annotations:
+        network.kubernetes.io/network-policy: "seven-network-policy"
+      labels:
+        app: seven
+    spec:
+      containers:
+      - name: seven
+        image: acr0720.azurecr.io/july20:1.0.0
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      imagePullSecrets:
+      - name: meghana
+      serviceAccountName: seven-service-account
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: Company  # Replace with the label key of your desired node
+                operator: In
+                values:
+                - Project  # Replace with the label value of your desired node
+      tolerations:  # Add the tolerations section
+      - key: "node-role.kubernetes.io/master"  # Replace with the taint key of the node you want to tolerate
+        operator: "Exists"  # You can also use "Equal" or "Exists" as per your requirement
+        effect: "NoSchedule"  # Replace with the effect of the taint (NoSchedule, PreferNoSchedule, NoExecute)
