@@ -50,3 +50,4 @@ spec:
         - key: "node-role.kubernetes.io/master"  # Replace with the taint key of the node you want to tolerate
           operator: "Exists"  # You can also use "Equal" or "Exists" as per your requirement
           effect: "NoSchedule"  # Replace with the effect of the taint (NoSchedule, PreferNoSchedule, NoExecute)
+
