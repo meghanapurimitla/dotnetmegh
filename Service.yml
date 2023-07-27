@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: seven
-  namespace: default
+  namespace: meghana
   labels:
     app: seven
 spec:

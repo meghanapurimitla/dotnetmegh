@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: seven
-  namespace: default
+  namespace: meghana
   labels:
     app: seven
 spec:
